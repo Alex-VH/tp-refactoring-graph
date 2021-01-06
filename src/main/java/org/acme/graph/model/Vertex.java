@@ -102,7 +102,7 @@ public class Vertex {
 	
 	
 	@JsonIgnore
-	public Collection<Edge> getOutEdge(){
+	public Collection<Edge> getOutEdges(){
 		return this.outEdges;
 	}
 	

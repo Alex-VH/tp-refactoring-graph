@@ -53,12 +53,12 @@ public class DijkstraRegressTest {
 
 		int index = 0;
 		{
-			Edge edge = path.getEdges().get(index++);
+			Edge edge = ((List<Edge>)path.getEdges()).get(index++);
 			assertEquals("a", edge.getSource().getId());
 			assertEquals("b", edge.getTarget().getId());
 		}
 		{
-			Edge edge = path.getEdges().get(index++);
+			Edge edge = ((List<Edge>)path.getEdges()).get(index++);
 			assertEquals("b", edge.getSource().getId());
 			assertEquals("c", edge.getTarget().getId());
 		}

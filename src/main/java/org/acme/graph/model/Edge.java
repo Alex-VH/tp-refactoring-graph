@@ -64,7 +64,7 @@ public class Edge {
 		return source;
 	}
 
-
+	@JsonIdentityReference(alwaysAsId=true)
 	public Vertex getTarget() {
 		return target;
 	}
