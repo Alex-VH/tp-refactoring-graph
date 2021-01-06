@@ -79,22 +79,23 @@ public class DijkstraPathFinder {
 		vertex.setVisited(true);
 	}
 
-	/**
-	 * Recherche des arcs sortant d'un sommet
-	 * 
-	 * @param vertex
-	 * @return
-	 */
-	private List<Edge> findOutEdges(Vertex vertex) {
-		List<Edge> result = new ArrayList<Edge>();
-		for (Edge candidate : graph.getEdges()) {
-			if (candidate.getSource() != vertex) {
-				continue;
-			}
-			result.add(candidate);
-		}
-		return result;
-	}
+//	/**
+//	 * Recherche des arcs sortant d'un sommet
+//	 * 
+//	 * @param vertex
+//	 * @return
+//	 */
+//	private List<Edge> findOutEdges(Vertex vertex) {
+//		List<Edge> result = new ArrayList<Edge>();
+//		for (Edge candidate : graph.getEdges()) {
+//			if (candidate.getSource() != vertex) {
+//				continue;
+//			}
+//			result.add(candidate);
+//		}
+//		return result;
+//	}
+	
 
 	/**
 	 * Construit le chemin en remontant les relations incoming edge

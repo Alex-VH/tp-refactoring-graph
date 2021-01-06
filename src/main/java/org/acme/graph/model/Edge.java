@@ -27,6 +27,8 @@ public class Edge {
 	public Edge(Vertex source, Vertex target) {
 		this.source = source;
 		this.target = target;
+//		this.source.getOutEdge().add(this);
+//		this.target.getInEdge().add(this);
 	}
 	
 
@@ -34,25 +36,21 @@ public class Edge {
 		return id;
 	}
 
+	
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	
 	public Vertex getSource() {
 		return source;
 	}
 
-	public void setSource(Vertex source) {
-		this.source = source;
-	}
 
 	public Vertex getTarget() {
 		return target;
 	}
 
-	public void setTarget(Vertex target) {
-		this.target = target;
-	}
 
 	/**
 	 * dijkstra - coût de parcours de l'arc (distance géométrique)
@@ -63,6 +61,7 @@ public class Edge {
 		return source.getCoordinate().distance(target.getCoordinate());
 	}
 
+	
 	@Override
 	public String toString() {
 		return id + " (" + source + "->" + target + ")";
