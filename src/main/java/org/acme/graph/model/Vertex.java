@@ -42,14 +42,12 @@ public class Vertex {
 	/**
 	 * Liste des arcs entrant dans ce sommet
 	 */
-	@JsonIgnore
 	private List<Edge> inEdges = new ArrayList<Edge>();
 	
 	
 	/**
 	 * Liste des arcs sortant de ce sommet
 	 */
-	@JsonIgnore
 	private List<Edge> outEdges = new ArrayList<Edge>();
 
 	Vertex() {
@@ -97,11 +95,13 @@ public class Vertex {
 		this.visited = visited;
 	}
 	
-	
+	@JsonIgnore
 	public Collection<Edge> getInEdge(){
 		return this.inEdges;
 	}
 	
+	
+	@JsonIgnore
 	public Collection<Edge> getOutEdge(){
 		return this.outEdges;
 	}
