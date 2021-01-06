@@ -2,40 +2,15 @@
 
 (TODO correspond à l'identifiant d'un problème à traiter pour la prochaine version)
 
-## TODO 0.2 - Ajout de fabriques pour les sommets et les arcs
-En ajoutant un constructeur Edge(source: Vertex, target: Vertex), on remarque que l'on a simplifié la création des arcs et des sommets.
+## TODO 0.3 - Indexation des arcs entrants et sortant
+En lisant attentivement DijsktraPathFinder (ou un utilisant un outil tel VisualVM), on remarque une méthode findOutEdges(vertex: Vertex) appelée très fréquemment dans la méthode visit(vertex: Vertex). Cette approche étant loin d'être optimale, on va indexer les arcs sortants et entrants comme suit :
 
-Toutefois, les opérations de création demeurent complexes et il reste la possibilité d'oublier d'ajouter les éléments aux listes de vertices et edges du graphe.
+* Ajout des attributs inEdges: List<Edge> et outEdges: List<Edge> sur Vertex
+* Ajout des getters getInEdges(): Collection<Edge> et getOutEdges(): Collection<Edge> sur Vertex
+* Remplissage automatique de inEdges et outEdges dans le constructeur Edge(source,target)
+* Suppression de setSource et setTarget dans Edge (pas besoin d'une topologie éditable, innutile de gérer la complexité pour inEdges et outEdges)
+* Suppression de findOutEdges dans DijkstraPathFinder et utilisation de getOutEdges
+* Exclusion de inEdges et outEdges des résultats de l'API (@JsonIgnore)
+* Ajout de tests
 
-On va donc procéder comme suit :
-
- *  Ajout d'une fabrique createVertex(coordinate,id): Vertex dans Graph
- *  Ajout d'une fabrique createEdge(source,target,id): Edge dans Graph
- *  Masquage des constructeur Vertex() et Edge(source,target)
- *  Suppression de Graph.setVertices(vertices) et Graph.setEdges(edges)
- 
-Ainsi, on passera de :
-
-```java
-Vertex a = new Vertex();
-a.setId("a");
-a.setCoordinate(new Coordinate(0.0, 0.0));
-graph.getVertices().add(a);
-
-Vertex b = new Vertex();
-b.setId("b");
-b.setCoordinate(new Coordinate(1.0, 0.0));
-graph.getVertices().add(b);
-
-Edge ab = new Edge(a,b);
-ab.setId("ab");
-graph.getEdges().add(ab);
-```
-à
-
-```java
-Vertex a = graph.createVertex(new Coordinate(0.0, 0.0),"a");
-Vertex b = graph.createVertex(new Coordinate(1.0, 0.0),"b");
-Edge ab  = graph.createEdge(a,b,"ab");
-```
-
+Remarque : Nous n'avons pas besoin pour l'algorithme actuel des inEdges mais il semble préférable au moins dans un premier temps de conserver une symétrie dans le modèle.
