@@ -24,11 +24,11 @@ public class Edge {
 	private Vertex target;
 	
 	
-	public Edge(Vertex source, Vertex target) {
+	Edge(Vertex source, Vertex target) {
 		this.source = source;
 		this.target = target;
-//		this.source.getOutEdge().add(this);
-//		this.target.getInEdge().add(this);
+		this.source.addOutEdge(this);
+		this.target.addInEdge(this);
 	}
 	
 

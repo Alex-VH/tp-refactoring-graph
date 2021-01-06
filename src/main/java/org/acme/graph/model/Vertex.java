@@ -1,5 +1,6 @@
 package org.acme.graph.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,12 +39,20 @@ public class Vertex {
 	 */
 	private boolean visited;
 	
+	/**
+	 * Liste des arcs entrant dans ce sommet
+	 */
+	@JsonIgnore
+	private List<Edge> inEdges = new ArrayList<Edge>();
 	
-	private List<Edge> inEdges;
 	
-	private List<Edge> outEdges;
+	/**
+	 * Liste des arcs sortant de ce sommet
+	 */
+	@JsonIgnore
+	private List<Edge> outEdges = new ArrayList<Edge>();
 
-	public Vertex() {
+	Vertex() {
 
 	}
 
@@ -97,6 +106,15 @@ public class Vertex {
 		return this.outEdges;
 	}
 	
+	
+	void addInEdge(Edge edge) {
+		this.inEdges.add(edge);
+	}
+	
+	
+	void addOutEdge(Edge edge) {
+		this.outEdges.add(edge);
+	}
 
 	@Override
 	public String toString() {
