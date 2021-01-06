@@ -46,6 +46,7 @@ public class Graph {
 				return vertex;
 			}
 		}
+		System.out.println("Vertex pas trouvé");
 		return null;
 	}
 

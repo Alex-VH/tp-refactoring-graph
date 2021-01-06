@@ -1,8 +1,6 @@
 package org.acme.graph.controllers;
 
-import java.util.List;
 
-import org.acme.graph.model.Edge;
 import org.acme.graph.model.Graph;
 import org.acme.graph.model.Path;
 import org.acme.graph.model.Vertex;
@@ -30,6 +28,8 @@ public class FindPathController {
 		@RequestParam(value = "destination", required = true)
 		String destinationId
 	) {
+		
+		System.out.println(originId);
 		DijkstraPathFinder pathFinder = new DijkstraPathFinder(graph);
 		Vertex origin = graph.findVertex(originId);
 		Vertex destination = graph.findVertex(destinationId);

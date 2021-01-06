@@ -1,7 +1,6 @@
 package org.acme.graph.cli;
 
 import java.io.File;
-import java.util.List;
 
 import org.acme.graph.io.GraphReader;
 import org.acme.graph.model.Edge;
@@ -47,6 +46,7 @@ public class FindPath {
 		DijkstraPathFinder pathFinder = new DijkstraPathFinder(graph);
 //		List<Edge> pathEdges = pathFinder.findPath(source, target);
 		Path pathEdges = pathFinder.findPath(source, target);
+		System.out.println("Ici " + pathEdges);
 		
 		if (pathEdges.getEdges() == null) {
 			System.err.println("path not found");

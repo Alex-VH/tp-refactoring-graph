@@ -1,5 +1,15 @@
 package org.acme.graph.model;
 
+import com.bedatadriven.jackson.datatype.jts.serialization.GeometrySerializer;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.geom.PrecisionModel;
+
 /**
  * 
  * Un arc matérialisé par un sommet source et un sommet cible
@@ -8,6 +18,13 @@ package org.acme.graph.model;
  *
  */
 public class Edge {
+	
+	@JsonIdentityInfo(
+			generator = ObjectIdGenerators.PropertyGenerator.class,
+			property = "id"
+	)
+	
+	
 	/**
 	 * Identifiant de l'arc
 	 */
@@ -22,6 +39,7 @@ public class Edge {
 	 * Sommet final
 	 */
 	private Vertex target;
+	
 	
 	
 	Edge(Vertex source, Vertex target) {
@@ -41,7 +59,7 @@ public class Edge {
 		this.id = id;
 	}
 
-	
+	@JsonIdentityReference(alwaysAsId=true)
 	public Vertex getSource() {
 		return source;
 	}
@@ -67,4 +85,14 @@ public class Edge {
 		return id + " (" + source + "->" + target + ")";
 	}
 
+	
+	@JsonSerialize(using = GeometrySerializer.class)
+    public LineString getGeometry() {
+        GeometryFactory gf = new GeometryFactory();
+        return (LineString)gf.createLineString(new Coordinate[] {
+            getSource().getCoordinate(),
+            getTarget().getCoordinate()
+        });
+    }
+	
 }
